@@ -1,0 +1,44 @@
+{
+  "name": "@volt-protocol/sdk",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for the Volt task escrow protocol",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "lint": "eslint src/**/*.ts",
+    "format": "prettier --write src/**/*.ts test/**/*.ts",
+    "format:check": "prettier --check src/**/*.ts test/**/*.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "ethereum",
+    "sdk",
+    "volt",
+    "escrow",
+    "tasks",
+    "bounties",
+    "viem"
+  ],
+  "author": "Volt Protocol Maintainers",
+  "license": "MIT",
+  "dependencies": {
+    "viem": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.2.4",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.1"
+  }
+}
