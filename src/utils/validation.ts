@@ -1,8 +1,8 @@
-import { isAddress } from 'viem';
+import { StrKey } from '@stellar/stellar-sdk';
 import { VoltError } from '../errors/VoltError';
 
 export const validateAddress = (address: string, label: string = 'Address') => {
-  if (!isAddress(address)) {
+  if (!StrKey.isValidEd25519PublicKey(address) && !StrKey.isValidContract(address)) {
     throw new VoltError(`Invalid ${label}: ${address}`);
   }
 };

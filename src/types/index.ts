@@ -1,6 +1,6 @@
-import type { Address, Account, Chain, PublicClient, WalletClient, Transport, Hex } from 'viem';
+import { SorobanRpc, Address } from '@stellar/stellar-sdk';
 
-export type { Address, Account, Chain, PublicClient, WalletClient, Transport, Hex };
+export type { Address };
 
 export enum TaskStatus {
   Created = 0,
@@ -12,9 +12,9 @@ export enum TaskStatus {
 }
 
 export interface Task {
-  creator: Address;
-  worker: Address;
-  token: Address;
+  creator: string;
+  worker?: string;
+  token: string;
   amount: bigint;
   deadline: bigint;
   status: TaskStatus;
@@ -22,13 +22,15 @@ export interface Task {
 }
 
 export interface VoltClientConfig {
-  publicClient: PublicClient<Transport, Chain>;
-  walletClient?: WalletClient<Transport, Chain, Account>;
-  contractAddress: Address;
+  rpcUrl: string;
+  networkPassphrase: string;
+  contractId: string;
+  secretKey?: string;
 }
 
 export interface CreateTaskParams {
-  token: Address;
+  creator: string;
+  token: string;
   amount: bigint;
   deadline: bigint;
   metadataUri: string;
