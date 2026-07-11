@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { TaskStatus } from '../src/types';
-import { getTaskStatusLabel, isTerminalTaskStatus, canSubmitTask, canCancelTask } from '../src/utils/status';
+import { getTaskStatusLabel, isTerminalTaskStatus, canSubmitTask, canCancelTask, canReleaseTask } from '../src/utils/status';
 
 describe('status utilities', () => {
   it('should return correct labels', () => {
@@ -24,5 +24,10 @@ describe('status utilities', () => {
     expect(canCancelTask(TaskStatus.Created)).toBe(true);
     expect(canCancelTask(TaskStatus.Funded)).toBe(true);
     expect(canCancelTask(TaskStatus.Assigned)).toBe(false);
+  });
+
+  it('should correctly determine if task can be released', () => {
+    expect(canReleaseTask(TaskStatus.Submitted)).toBe(true);
+    expect(canReleaseTask(TaskStatus.Completed)).toBe(false);
   });
 });

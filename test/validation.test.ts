@@ -1,12 +1,20 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { validateAddress, validatePositiveBigInt, validateNonEmptyString, validateFutureDeadline } from '../src/utils/validation';
+import { StrKey } from '@stellar/stellar-sdk';
 
 describe('validation utilities', () => {
-  it('should validate correct addresses', () => {
-    expect(() => validateAddress('0x1234567890123456789012345678901234567890')).not.toThrow();
+  it('should validate correct Stellar public keys', () => {
+    const validPublicKey = StrKey.encodeEd25519PublicKey(Buffer.alloc(32));
+    expect(() => validateAddress(validPublicKey)).not.toThrow();
+  });
+
+  it('should validate correct Stellar contract addresses', () => {
+    const validContractId = StrKey.encodeContract(Buffer.alloc(32));
+    expect(() => validateAddress(validContractId)).not.toThrow();
   });
 
   it('should throw on invalid addresses', () => {
+    expect(() => validateAddress('invalid')).toThrow('Invalid Address');
     expect(() => validateAddress('0xinvalid')).toThrow('Invalid Address');
   });
 
